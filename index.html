@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Event Registration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+    <h1>College Event Registration</h1>
+    <p>Register for your favourite college events</p>
+</header>
+
+<main class="container">
+    <section class="events">
+        <h2>Upcoming Events</h2>
+        <div class="event-grid">
+            {% for event in events %}
+            <div class="event-card">
+                <h3>{{ event.name }}</h3>
+                <p>📅 {{ event.date }}</p>
+                <p>⏰ {{ event.time }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="form-box">
+        <h2>Student Registration Form</h2>
+        <form action="/register" method="POST" onsubmit="return validateForm()">
+            <label for="name">Student Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name">
+
+            <label for="register_no">Register Number</label>
+            <input type="text" id="register_no" name="register_no" placeholder="Enter register number">
+
+            <label for="department">Department</label>
+            <select id="department" name="department">
+                <option value="">Choose department</option>
+                <option value="CSE">CSE</option>
+                <option value="IT">IT</option>
+                <option value="ECE">ECE</option>
+                <option value="EEE">EEE</option>
+                <option value="Mechanical">Mechanical</option>
+                <option value="Civil">Civil</option>
+            </select>
+
+            <label for="year">Year</label>
+            <select id="year" name="year">
+                <option value="">Choose year</option>
+                <option value="1st Year">1st Year</option>
+                <option value="2nd Year">2nd Year</option>
+                <option value="3rd Year">3rd Year</option>
+                <option value="4th Year">4th Year</option>
+            </select>
+
+            <label for="event">Select Event</label>
+            <select id="event" name="event">
+                <option value="">Choose event</option>
+                {% for event in events %}
+                <option value="{{ event.name }}">{{ event.name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="student@example.com">
+
+            <button type="submit">Register Now</button>
+            <p id="error-message" class="error"></p>
+        </form>
+    </section>
+</main>
+
+<footer>
+    <a href="/admin">View Registered Students</a>
+</footer>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

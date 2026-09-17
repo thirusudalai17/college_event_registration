@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registered Students</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+    <h1>Registered Students</h1>
+    <p>College Event Registration Admin View</p>
+</header>
+<main class="container">
+    {% if registrations %}
+    <div class="table-wrapper">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Register No</th>
+                <th>Department</th>
+                <th>Year</th>
+                <th>Event</th>
+                <th>Email</th>
+            </tr>
+            {% for student in registrations %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.register_no }}</td>
+                <td>{{ student.department }}</td>
+                <td>{{ student.year }}</td>
+                <td>{{ student.event }}</td>
+                <td>{{ student.email }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% else %}
+    <p>No registrations yet.</p>
+    {% endif %}
+    <p><a href="/">Back to Registration</a></p>
+</main>
+</body>
+</html>
